@@ -10,11 +10,8 @@
    	<antcall target="pushSourceforge" />
 	<property name="LINKBACK_TAG" value="&lt;p CLASS=&quot;linkback&quot;&gt;&lt;a href=&quot;Recipes.htm&quot; target=&quot;_parent&quot;&gt;Richi's Rezeptsammlung&lt;/a&gt;&lt;/p&gt;"/>
    	<antcall target="pushLocalhost" />
-   	<!-- <antcall target="pushWarrior" /> -->
-   	<!-- <antcall target="pushIndian" /> -->
-   	<antcall target="pushKatana" />
-   	<antcall target="pushLomumba" />
-	</target>   	
+   	<antcall target="pushGladius" />
+    </target>   	
     
     <target name="pushLocalhost" depends="checkroot, cleanup" description="Pushes the files to the Localhost">
 	   <property name="targetRoot" value="/srv/www/htdocs/Homepage" />
@@ -31,31 +28,6 @@
 		<antcall target="unmountFs" />
    </target>
 
-
-   <target name="pushWarrior" depends="checkroot, cleanup" description="Pushes the files to Warrior using sshfs">
-   	<property name="sshDrive" value="root@warrior:/srv/www/htdocs/Homepage" />
-	<property name="targetRoot" value="/mnt" />
-	<antcall target="mountSshFs" />
-	<antcall target="pushFiles" />
-	<antcall target="unmountFs" />
-   </target>
-
-   <target name="pushIndian" depends="checkroot, cleanup" description="Pushes the files to Indian using sshfs">
-   	<property name="sshDrive" value="root@indian:/srv/www/htdocs/Homepage" />
-	<property name="targetRoot" value="/mnt" />
-	<antcall target="mountSshFs" />
-	<antcall target="pushFiles" />
-	<antcall target="unmountFs" />
-   </target>
-
-   <target name="pushKatana" depends="checkroot, cleanup" description="Pushes the files to Katana using sshfs">
-   	<property name="sshDrive" value="root@katana:/srv/www/htdocs/Homepage" />
-	<property name="targetRoot" value="/mnt" />
-	<antcall target="mountSshFs" />
-	<antcall target="pushFiles" />
-	<antcall target="unmountFs" />
-   </target>
-
    <target name="pushGladius" depends="checkroot, cleanup" description="Pushes the files to Katana using sshfs">
    	<property name="sshDrive" value="root@gladius:/srv/www/htdocs/Homepage" />
 	<property name="targetRoot" value="/mnt" />
@@ -65,17 +37,7 @@
    </target>
 
 
-   <target name="pushLomumba" depends="checkroot, cleanup" description="Pushes the files to Lomumba using sshfs">
-   	<property name="sshDrive" value="root@pat.lomumba.ch:/www/lomumba/phpwcms/richi/" />
-	<property name="targetRoot" value="/mnt" />
-	<antcall target="mountSshFs">
-		<param name="sshPort" value="-p11222"/>
-	</antcall>
-	<antcall target="pushFiles" />
-	<antcall target="unmountFs" />
-   </target>
-
-    <target name="cleanup" description="Deletes the ~ files that quanta creates" >
+   <target name="cleanup" description="Deletes the ~ files that quanta creates" >
         <delete verbose="${TALK}">
             <fileset dir="."
 			includes="*~" defaultexcludes="no" />
