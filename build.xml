@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="Richard's Homepage" default="pushAll">
+<project name="Rezeptsammlung" default="pushAll">
     <property name="TALK" value="true" />
     <property name="sshPort" value="-p22"/>
     <import file="../RichiNet/CommonAntTargets.xml" />
@@ -43,7 +43,7 @@
         </delete>
     </target>
  
-    <target name="pushFiles" description="Pushes the files to mounted directory">
+    <target name="pushFiles" depends="lastUpdate, createJsonData" description="Pushes the files to mounted directory">
         <copy todir="${targetRoot}" verbose="yes">
             <fileset dir=".">
                 <include name="**/*.htm"/>
@@ -57,7 +57,52 @@
         <copy todir="${targetRoot}" verbose="yes">
             <fileset dir=".">
                 <exclude name="**/*.htm"/>
+                <exclude name="**/build.xml"/>
             </fileset>
         </copy> 
     </target>
+    
+    
+    
+    <target name="lastUpdate" description="Creates the lastRecipeModified.json file">
+        <!-- needs ant-contrib to be installed -->
+        <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+        <timestampselector property="latestRecipeModified" age="youngest" count="1">
+            <path>
+                <fileset dir=".">
+                    <include name="Rcp*" />
+                </fileset>
+            </path>
+        </timestampselector>
+
+        <echo message="The most recent modified recipe file is: ${latestRecipeModified}" />
+        
+        <scriptdef name="file.mdate" language="javascript"> 
+            <attribute name="file"/> 
+            <attribute name="property"/> 
+            file_name = attributes.get("file"); 
+            property_to_set = attributes.get("property");
+
+            file = new java.io.File(file_name); 
+            file_date = file.lastModified();
+
+            date_format = new java.text.SimpleDateFormat("YYYY-MM-dd'T'HH:mm:ss.SSSZ");
+            formated_date = date_format.format(new java.util.Date(file_date));
+            project.setNewProperty(property_to_set, formated_date);
+        </scriptdef> 
+        
+        <file.mdate
+            file="${latestRecipeModified}"
+            property="file.modified.date"/>
+        <echo>It was updated on: ${file.modified.date}</echo>
+        
+        <echo output="lastRecipeModified.json">{ "lastRecipeModified": "${file.modified.date}" }</echo>
+    </target>
+    
+    <target name="createJsonData" description="Creates the JSON formatted data file">
+        <exec executable="/usr/bin/php" output="recipes.json">
+            <arg line="../RcpClient/RecipeServer/createRecipeJson.php"/>
+        </exec>
+    </target>
+
 </project>
