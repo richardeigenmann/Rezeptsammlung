@@ -11,7 +11,7 @@
 
   ga('create', 'UA-47341387-3', 'auto');
   ga('send', 'pageview');
-&lt;/script>"
+&lt;/script>
 </property>
 
     <import file="../RichiNet/CommonAntTargets.xml" />
