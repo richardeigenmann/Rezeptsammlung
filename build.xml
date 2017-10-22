@@ -116,5 +116,11 @@
             <arg line="../RcpClient/RecipeServer/createRecipeJson.php"/>
         </exec>
     </target>
+    
+    <target name="createJsonDataArray" description="Creates the JSON formatted data file as an Array">
+        <exec executable="/usr/bin/php" output="recipesArray.json">
+            <arg line="../RcpClient/RecipeServer/createRecipeJsonAsArray.php"/>
+        </exec>
+    </target>
 
 </project>
