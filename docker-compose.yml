@@ -1,7 +1,7 @@
 # docker-compose up -d --build
 # based on https://medium.com/@lojorider/docker-with-cgi-perl-a4558ab6a329
 
-version: '2'
+version: '3'
 services:
     web:
         container_name: recipes
@@ -9,25 +9,9 @@ services:
             context: .
         volumes:
             - ./weblog:/var/log/nginx/web
-#            - /richi/mp3:/var/www/mp3
+        restart: always
         ports:
             - "8086:80"
-        #extra_hosts:
-        #    - "gladius:192.168.1.104"
-        #networks:
-        #    - richinet-network
-
-    #php:
-    #    container_name: richinet_php
-    #    build:
-    #        context: .
-    #        dockerfile: Dockerfile-php
-        #volumes:
-        #    - /richi/mp3:/var/www/mp3
-        #extra_hosts:
-        #    - "gladius:192.168.1.104"
-        #networks:
-        #    - richinet-network
 
 networks:
    default:
