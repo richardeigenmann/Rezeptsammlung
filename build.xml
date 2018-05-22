@@ -15,14 +15,14 @@
 </property>
 
     <import file="../RichiNet/CommonAntTargets.xml" />
-    
+
     <target name="pushAll" depends="cleanup" description="Push to all locations">
         <property name="LINKBACK_TAG" value="&lt;p CLASS=&quot;linkback&quot;&gt;&lt;a href=&quot;Recipes.htm&quot; target=&quot;_parent&quot;&gt;Richi's Rezeptsammlung&lt;/a&gt;&lt;/p&gt;"/>
         <antcall target="pushLocalhost" />
         <antcall target="pushGladius" />
         <antcall target="pushSourceforge" />
-    </target>   	
-    
+    </target>
+
     <target name="pushLocalhost" depends="checkroot, cleanup" description="Pushes the files to the Localhost">
         <property name="targetRoot" value="/srv/www/htdocs/Homepage" />
         <antcall target="pushFiles" />
@@ -53,7 +53,7 @@
                      includes="*~" defaultexcludes="no" />
         </delete>
     </target>
- 
+
     <target name="pushFiles" depends="lastUpdate, createJsonData" description="Pushes the files to mounted directory">
         <copy todir="${targetRoot}" verbose="yes">
             <fileset dir=".">
@@ -63,19 +63,19 @@
                 <filter token="LINKBACK_TAG" value="${LINKBACK_TAG}"/>
                 <filter token="GOOGLE_ANALYTICS" value="${GOOGLE_ANALYTICS}"/>
             </filterset>
-        </copy> 
-        <!-- http://ant.apache.org/manual/Tasks/copy.html 
+        </copy>
+        <!-- http://ant.apache.org/manual/Tasks/copy.html
         Note: If you employ filters in your copy operation, you should limit the copy to text files. Binary files will be corrupted by the copy operation. This applies whether the filters are implicitly defined by the filter task or explicitly provided to the copy operation as filtersets. See encoding note. -->
         <copy todir="${targetRoot}" verbose="yes">
             <fileset dir=".">
                 <exclude name="**/*.htm"/>
                 <exclude name="**/build.xml"/>
             </fileset>
-        </copy> 
+        </copy>
     </target>
-    
-    
-    
+
+
+
     <target name="lastUpdate" description="Creates the lastRecipeModified.json file">
         <!-- needs ant-contrib to be installed -->
         <taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
@@ -88,35 +88,40 @@
         </timestampselector>
 
         <echo message="The most recent modified recipe file is: ${latestRecipeModified}" />
-        
-        <scriptdef name="file.mdate" language="javascript"> 
-            <attribute name="file"/> 
-            <attribute name="property"/> 
-            file_name = attributes.get("file"); 
+
+        <scriptdef name="file.mdate" language="javascript">
+            <attribute name="file"/>
+            <attribute name="property"/>
+            file_name = attributes.get("file");
             property_to_set = attributes.get("property");
 
-            file = new java.io.File(file_name); 
+            file = new java.io.File(file_name);
             file_date = file.lastModified();
 
             date_format = new java.text.SimpleDateFormat("YYYY-MM-dd'T'HH:mm:ss.SSSZ");
             formated_date = date_format.format(new java.util.Date(file_date));
             project.setNewProperty(property_to_set, formated_date);
-        </scriptdef> 
-        
+        </scriptdef>
+
         <file.mdate
             file="${latestRecipeModified}"
             property="file.modified.date"/>
         <echo>It was updated on: ${file.modified.date}</echo>
-        
+
         <echo output="lastRecipeModified.json">{ "lastRecipeModified": "${file.modified.date}" }</echo>
     </target>
-    
+
     <target name="createJsonData" description="Creates the JSON formatted data file">
         <exec executable="/usr/bin/php" output="recipes.json">
             <arg line="../RcpClient/RecipeServer/createRecipeJson.php"/>
         </exec>
     </target>
-    
+    <target name="createJsonDataUtf8" description="Creates the JSON formatted data file in utf8">
+        <exec executable="/usr/bin/php" output="recipesutf8.json">
+            <arg line="../RcpClient/RecipeServer/createRecipeJsonUtf8.php"/>
+        </exec>
+    </target>
+
     <target name="createJsonDataArray" description="Creates the JSON formatted data file as an Array">
         <exec executable="/usr/bin/php" output="recipesArray.json">
             <arg line="../RcpClient/RecipeServer/createRecipeJsonAsArray.php"/>
