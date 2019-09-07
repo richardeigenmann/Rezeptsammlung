@@ -31,7 +31,7 @@
     <target name="pushSourceforge" depends="cleanup" description="Pushes the files to Sourceforge using sshfs">
         <property name="sshDrive" value="richieigenmann@frs.sourceforge.net:/home/user-web/richieigenmann/htdocs" />
         <property name="targetRoot" value="/mnt" />
-        <property name="LINKBACK_TAG" value="&lt;p CLASS=&quot;linkback&quot;&gt;&lt;a href=&quot;rezeptsammlung.html&quot;;&gt;Richi's Rezeptsammlung&lt;/a&gt;&lt;/p&gt;"/>
+        <property name="LINKBACK_TAG" value="&lt;p CLASS=&quot;linkback&quot;&gt;&lt;a href=&quot;rezeptsammlung.html&quot;&gt;Richi's Rezeptsammlung&lt;/a&gt;&lt;/p&gt;"/>
 
         <antcall target="mountSshFs" />
         <antcall target="pushFiles" />
