@@ -1,6 +1,7 @@
 https://richardeigenmann.github.io/Rezeptsammlung/Recipes.htm
 
+# Publish
+
 ```bash
-su
-ant pushSourceforge
+sudo ant pushSourceforge
 ```
