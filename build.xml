@@ -54,10 +54,11 @@
         </delete>
     </target>
 
-    <target name="pushFiles" depends="lastUpdate, createJsonData" description="Pushes the files to mounted directory">
+    <target name="pushFiles" depends="lastUpdate, createJsonData, createJsonDataUtf8, createJsonDataArray" description="Pushes the files to mounted directory">
         <copy todir="${targetRoot}" verbose="yes">
             <fileset dir=".">
                 <include name="**/*.htm"/>
+                <include name="**/*.json"/>
             </fileset>
             <filterset>
                 <filter token="LINKBACK_TAG" value="${LINKBACK_TAG}"/>
