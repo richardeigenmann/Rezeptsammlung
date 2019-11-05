@@ -17,30 +17,16 @@
     <import file="../RichiNet/CommonAntTargets.xml" />
 
     <target name="pushAll" depends="cleanup" description="Push to all locations">
-        <property name="LINKBACK_TAG" value="&lt;p CLASS=&quot;linkback&quot;&gt;&lt;a href=&quot;Recipes.htm&quot; target=&quot;_parent&quot;&gt;Richi's Rezeptsammlung&lt;/a&gt;&lt;/p&gt;"/>
-        <antcall target="pushLocalhost" />
-        <antcall target="pushGladius" />
+        <property name="LINKBACK_TAG" value="&lt;p CLASS=&quot;linkback&quot;&gt;&lt;a href=&quot;https://richardeigenmann.github.io/RezeptsammlungNg&quot; target=&quot;_parent&quot;&gt;Richi's Rezeptsammlung&lt;/a&gt;&lt;/p&gt;"/>
         <antcall target="pushSourceforge" />
     </target>
 
-    <target name="pushLocalhost" depends="checkroot, cleanup" description="Pushes the files to the Localhost">
-        <property name="targetRoot" value="/srv/www/htdocs/Homepage" />
-        <antcall target="pushFiles" />
-    </target>
 
     <target name="pushSourceforge" depends="cleanup" description="Pushes the files to Sourceforge using sshfs">
         <property name="sshDrive" value="richieigenmann@frs.sourceforge.net:/home/user-web/richieigenmann/htdocs" />
         <property name="targetRoot" value="/mnt" />
-        <property name="LINKBACK_TAG" value="&lt;p CLASS=&quot;linkback&quot;&gt;&lt;a href=&quot;rezeptsammlung.html&quot;&gt;Richi's Rezeptsammlung&lt;/a&gt;&lt;/p&gt;"/>
+        <property name="LINKBACK_TAG" value="&lt;p CLASS=&quot;linkback&quot;&gt;&lt;a href=&quot;https://richardeigenmann.github.io/RezeptsammlungNg&quot;&gt;Richi's Rezeptsammlung&lt;/a&gt;&lt;/p&gt;"/>
 
-        <antcall target="mountSshFs" />
-        <antcall target="pushFiles" />
-        <antcall target="unmountFs" />
-    </target>
-
-    <target name="pushGladius" depends="cleanup" description="Pushes the files to Katana using sshfs">
-        <property name="sshDrive" value="root@gladius:/srv/www/htdocs/Homepage" />
-        <property name="targetRoot" value="/mnt" />
         <antcall target="mountSshFs" />
         <antcall target="pushFiles" />
         <antcall target="unmountFs" />
