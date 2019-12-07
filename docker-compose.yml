@@ -1,5 +1,6 @@
 # docker-compose up -d --build
 # based on https://medium.com/@lojorider/docker-with-cgi-perl-a4558ab6a329
+# docker exec -it recipes bash
 
 version: '3'
 services:
