@@ -6,4 +6,4 @@ https://richardeigenmann.github.io/Rezeptsammlung/Recipes.htm
 sudo ant pushSourceforge
 ```
 
-? And how did I get this to gh-pages...?
+Push the RezeptsammlungNG as it embeds the recipes
