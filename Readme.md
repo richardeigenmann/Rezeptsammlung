@@ -6,6 +6,12 @@ https://richardeigenmann.github.io/Rezeptsammlung/Recipes.htm
 sudo ant pushSourceforge
 ```
 
+```bash
+ant createJsonDataUtf8
+cp /richi/Src/Rezeptsammlung/recipesutf8.json /richi/Src/RezeptsammlungNg/recipes.json
+cp /richi/Src/Rezeptsammlung/recipesutf8.json /richi/Src/RezeptsammlungNg/src/api/products/recipes.json
+```
+
 Push the RezeptsammlungNG as it embeds the recipes
 
 For gh-pages:
