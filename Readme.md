@@ -15,6 +15,8 @@ cp /richi/Src/Rezeptsammlung/recipesutf8.json /richi/Src/RezeptsammlungNg/src/ap
 Push the RezeptsammlungNG as it embeds the recipes
 
 For gh-pages:
+cd /tmp/
+git clone -b gh-pages git@github.com:richardeigenmann/Rezeptsammlung.git
 cd /tmp/Rezeptsammlung
 git checkout gh-pages
 cp /richi/Src/Rezeptsammlung/*.htm .
