@@ -104,11 +104,11 @@
         <echo output="lastRecipeModified.json">{ "lastRecipeModified": "${file.modified.date}" }</echo>
     </target>
 
-    <target name="createJsonData" description="Creates the JSON formatted data file">
+    <!-- <target name="createJsonData" description="Creates the JSON formatted data file">
         <exec executable="/usr/bin/php" output="recipes.json">
             <arg line="../RcpClient/RecipeServer/createRecipeJson.php"/>
         </exec>
-    </target>
+    </target> -->
     <target name="createJsonDataUtf8" description="Creates the JSON formatted data file in utf8">
         <exec executable="/usr/bin/php" output="recipesutf8.json">
             <arg line="../RcpClient/RecipeServer/createRecipeJsonUtf8.php"/>
