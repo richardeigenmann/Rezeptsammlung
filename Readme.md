@@ -19,7 +19,7 @@ sed -i -e "/@GOOGLE_ANALYTICS@/ {
     r /richi/Src/Rezeptsammlung/linkback.htm
     d
 }" *htm
-pagecp /richi/Src/Rezeptsammlung/*.jpg .
+cp /richi/Src/Rezeptsammlung/*.jpg .
 php /richi/Src/Rezeptsammlung/createRecipeJsonUtf8.php
 git add .
 git commit -m "update"
