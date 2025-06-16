@@ -1,6 +1,14 @@
-https://richardeigenmann.github.io/Rezeptsammlung/Recipes.htm
 
-# Publish
+# Rezeptsammlung von Richard Eigenmann
+
+Schauen Sie das Resultat hier an:
+
+https://richardeigenmann.github.io/RezeptsammlungNg/homepage
+
+
+# Developer Notes
+
+## Publish
 
 Push the RezeptsammlungNG as it embeds the recipes
 
