@@ -5,7 +5,6 @@ Schauen Sie das Resultat hier an:
 
 https://richardeigenmann.github.io/RezeptsammlungNg/homepage
 
-
 # Developer Notes
 
 ## Publish
@@ -25,6 +24,9 @@ sed -i -e "/@GOOGLE_ANALYTICS@/ {
     d
 }" -e "/@LINKBACK_TAG@/ {
     r /richi/Src/Rezeptsammlung/linkback.htm
+    d
+}" -e "/<\/head\>/ { 
+    r /richi/Src/Rezeptsammlung/google_analytics_head_tag.html
     d
 }" *htm
 cp /richi/Src/Rezeptsammlung/*.jpg .
